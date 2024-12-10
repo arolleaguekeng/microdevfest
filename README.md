@@ -32,12 +32,12 @@ These targets are either [inferred automatically](https://nx.dev/concepts/inferr
 ## Add new projects
 ### Add Remote and Host Angular Projects
 ```sh
-npx nx g @nx/angular:host apps/shell --ssr --add-tailwind --dynamic --remotes=home
+npx nx g @nx/angular:host apps/shell --add-tailwind --dynamic --remotes=home
 ```
-
+nx g @nx/react:remote apps/shop --host=apps/shell
 ### Add Remote React Project
 ```sh
-npx nx g @nx/react:app apps/shop --remotes=
+npx nx g @nx/react:app apps/shop --remotes=apps/shell
 ```
 While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
 

@@ -4,8 +4,6 @@ const config: ModuleFederationConfig = {
   name: 'shop',
   exposes: {
     './Module': './src/remote-entry.ts',
-    './shop': './src/app/nx-welcome.tsx',
-    './web-components': './src/bootstrap.tsx'
   },
 };
 

@@ -10,7 +10,7 @@
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/shell/browser",
+        "outputPath": "dist/apps/shell",
         "index": "apps/shell/src/index.html",
         "main": "apps/shell/src/main.ts",
         "polyfills": ["zone.js"],
@@ -94,62 +94,6 @@
         "port": 4200,
         "spa": true
       }
-    },
-    "server": {
-      "dependsOn": ["build"],
-      "executor": "@nx/angular:webpack-server",
-      "options": {
-        "outputPath": "dist/apps/shell/server",
-        "main": "apps/shell/src/server.ts",
-        "tsConfig": "apps/shell/tsconfig.server.json",
-        "inlineStyleLanguage": "scss",
-        "customWebpackConfig": {
-          "path": "apps/shell/webpack.server.config.ts"
-        }
-      },
-      "configurations": {
-        "production": {
-          "outputHashing": "media"
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "sourceMap": true,
-          "extractLicenses": false
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "serve-ssr": {
-      "executor": "@nx/angular:module-federation-dev-ssr",
-      "configurations": {
-        "development": {
-          "browserTarget": "shell:build:development",
-          "serverTarget": "shell:server:development"
-        },
-        "production": {
-          "browserTarget": "shell:build:production",
-          "serverTarget": "shell:server:production"
-        }
-      },
-      "defaultConfiguration": "development"
-    },
-    "prerender": {
-      "executor": "@angular-devkit/build-angular:prerender",
-      "options": {
-        "routes": ["/"]
-      },
-      "configurations": {
-        "development": {
-          "browserTarget": "shell:build:development",
-          "serverTarget": "shell:server:development"
-        },
-        "production": {
-          "browserTarget": "shell:build:production",
-          "serverTarget": "shell:server:production"
-        }
-      },
-      "defaultConfiguration": "production"
     }
   }
 }

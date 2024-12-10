@@ -10,7 +10,7 @@
       "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/home/browser",
+        "outputPath": "dist/apps/home",
         "index": "apps/home/src/index.html",
         "main": "apps/home/src/main.ts",
         "polyfills": ["zone.js"],
@@ -105,72 +105,6 @@
         "production": {
           "buildTarget": "home:build:production"
         }
-      }
-    },
-    "server": {
-      "dependsOn": ["build"],
-      "executor": "@nx/angular:webpack-server",
-      "options": {
-        "outputPath": "dist/apps/home/server",
-        "main": "apps/home/src/server.ts",
-        "tsConfig": "apps/home/tsconfig.server.json",
-        "inlineStyleLanguage": "scss",
-        "customWebpackConfig": {
-          "path": "apps/home/webpack.server.config.ts"
-        }
-      },
-      "configurations": {
-        "production": {
-          "outputHashing": "media"
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "sourceMap": true,
-          "extractLicenses": false
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "serve-ssr": {
-      "executor": "@angular-devkit/build-angular:ssr-dev-server",
-      "configurations": {
-        "development": {
-          "browserTarget": "home:build:development",
-          "serverTarget": "home:server:development"
-        },
-        "production": {
-          "browserTarget": "home:build:production",
-          "serverTarget": "home:server:production"
-        }
-      },
-      "defaultConfiguration": "development",
-      "options": {
-        "port": 4201
-      }
-    },
-    "prerender": {
-      "executor": "@angular-devkit/build-angular:prerender",
-      "options": {
-        "routes": ["/"]
-      },
-      "configurations": {
-        "development": {
-          "browserTarget": "home:build:development",
-          "serverTarget": "home:server:development"
-        },
-        "production": {
-          "browserTarget": "home:build:production",
-          "serverTarget": "home:server:production"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "static-server": {
-      "dependsOn": ["build", "server"],
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "PORT=4201 node dist/apps/home/server/main.js"
       }
     }
   }

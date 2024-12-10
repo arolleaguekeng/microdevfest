@@ -1,7 +1,7 @@
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { Route } from '@angular/router';
 import { loadRemote } from '@module-federation/enhanced/runtime';
-import { WrapperComponent } from './components-wrapper/shop-wrapper.component';
+import { WrapperComponent } from './react-wrapper/react-wrapper-component';
 
 export const appRoutes: Route[] = [
   {
@@ -14,6 +14,10 @@ export const appRoutes: Route[] = [
   {
     path: 'shop',
     component: WrapperComponent,
+    data: {
+      elementName: 'shop-react',
+      loadChildren: () => import('shop/Module'),
+    },
   },
   {
     path: '',
