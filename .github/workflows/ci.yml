@@ -11,32 +11,53 @@ permissions:
   contents: read
 
 jobs:
-  main:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
-      
 
-      # This enables task distribution via Nx Cloud
-      # Run this command as early as possible, before dependencies are installed
-      # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
-      # Uncomment this line to enable task distribution
-      # - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="build"
-
-      
-      # Cache node_modules
-      - uses: actions/setup-node@v4
+      # Setup Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-       
-      - run: npm ci --legacy-peer-deps
-      - uses: nrwl/nx-set-shas@v4
 
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: npx nx-cloud record -- echo Hello World
-      # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
-      - run: npx nx affected -t lint test build
+      # Install Dependencies
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      # Set Nx SHAs for affected commands
+      - name: Set SHAs for Nx Affected
+        uses: nrwl/nx-set-shas@v4
+
+      # Run Lint, Test, and Build only for affected projects
+      - name: Run Lint, Test, and Build
+        run: npx nx affected -t lint test build
+
+      # Setup Firebase CLI
+      - name: Set up Firebase CLI
+        uses: w9jds/firebase-action@v2.0.0
+        with:
+          firebase_token: ${{ secrets.FIREBASE_TOKEN }}
+
+      # Deploy Angular Shell App
+      - name: Deploy Shell App
+        run: |
+          npx nx build shell --prod
+          firebase deploy --only hosting:shell --project=your-shell-project-id
+
+      # Deploy Angular Remote App (Shop)
+      - name: Deploy Shop App
+        run: |
+          npx nx build shop --prod
+          firebase deploy --only hosting:shop --project=your-shop-project-id
+
+      # Deploy React Remote App (Home)
+      - name: Deploy Home App
+        run: |
+          npx nx build home --prod
+          firebase deploy --only hosting:home --project=your-home-project-id
