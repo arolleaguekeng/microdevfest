@@ -8,8 +8,8 @@ export function App() {
           <div className="relative flex flex-col items-center w-full md:max-w-[80vw] xl:max-w-[65vw] mx-auto overflow-visible lg:-mt-14 xl:-mt-0">
             <div className="">
               <img
-                src="assets/images/logo-devfest/logo-devfest-2024-home.png"
-                alt="DevFest Douala Image"
+                src={"assets/images/logo-devfest/logo-devfest-2024-home.png"}
+                alt="DevFest logo Douala "
                 className="xl:h-[140px] md:h-[100px] lg:h-[100px] h-[50px]"
               />
             </div>
