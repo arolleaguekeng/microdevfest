@@ -1,6 +1,9 @@
-<ul class="remote-menu">
-  <li><a routerLink="/">Home</a></li>
-  <li><a routerLink="home">Home</a></li>
-  <li><a routerLink="shop">Home</a></li>
-</ul>
-<router-outlet></router-outlet>
+<div class="fixed z-50">
+  <app-navbar></app-navbar>
+</div>
+<div
+  class="w-[100%] lg:pt-[140px] md:pt-[140px] pt-[100px] overflow-x-auto max-md:px-2 overflow-hidden shadow-lg text-white bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg"
+>
+  <router-outlet (activate)="resetPosition()"></router-outlet>
+  <app-footer></app-footer>
+</div>

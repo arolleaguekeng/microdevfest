@@ -1,26 +1,31 @@
-import { NxWelcomeComponent } from './nx-welcome.component';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Route } from '@angular/router';
 import { loadRemote } from '@module-federation/enhanced/runtime';
 import { WrapperComponent } from './react-wrapper/react-wrapper-component';
 
 export const appRoutes: Route[] = [
   {
-    path: 'home',
+    path: 'shop',
     loadChildren: () =>
-      loadRemote<typeof import('home/Routes')>('home/Routes').then(
+      loadRemote<typeof import('shop/Routes')>('shop/Routes').then(
         (m) => m!.remoteRoutes
       ),
   },
   {
-    path: 'shop',
+    path: 'home',
     component: WrapperComponent,
     data: {
-      elementName: 'shop-react',
-      loadChildren: () => import('shop/Module'),
+      elementName: 'home-react',
+      loadChildren: () => import('home/Module'),
     },
   },
   {
     path: '',
-    component: NxWelcomeComponent,
+    component: WrapperComponent,
+    data: {
+      elementName: 'home-react',
+      loadChildren: () => import('home/Module'),
+    },
   },
+
 ];

@@ -1,5 +1,205 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* You can add global styles to this file, and also import other style files */
+/* Styles globaux */
+body {
+  background-position: center;
+  /*   background-repeat: no-repeat; */
+  background-size: contain;
+  background-image: url('/assets/images/home-images/background.jpeg');
+}
+
+@layer base {
+  /* Déclaration de la police Tilt Warp */
+  @font-face {
+    font-family: 'Tilt Warp';
+    src: url('/assets/static/TiltWarp-Regular.ttf') format('truetype');
+  }
+
+  /* Application de Tilt Warp à l'ensemble du site */
+  * {
+    font-family: 'Fustat', sans-serif;
+  }
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.moveIn {
+  animation: dissolveIn 0.7s ease-in;
+}
+
+.moveTop {
+  animation: dissolveInTop 0.5s ease-in-out;
+}
+
+.moveTop-Right {
+  animation: dissolveInTop-Right 0.7s ease-in-out;
+}
+
+.moveBottom-Right {
+  animation: dissolveInBottom-Right 0.7s ease-in-out;
+}
+
+.moveInLeft {
+  animation: dissolveInLeft 0.7s ease-in-out;
+}
+
+.moveInBottom {
+  animation: dissolveInBottom 0.7s ease-in-out;
+}
+.moveInBottom-Left {
+  animation: dissolveInBottom-Left 0.7s ease-in-out;
+}
+.moveInRight {
+  animation: dissolveInRight 0.7s ease-in-out;
+}
+
+@keyframes dissolveInTop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -100px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes dissolveInTop-Right {
+  0% {
+    opacity: 0;
+    transform: translate3d(200px, -100px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dissolveInBottom-Right {
+  0% {
+    opacity: 0;
+    transform: translate3d(200px, 100px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes dissolveInLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-200px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dissolveInBottom {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dissolveInBottom-Left {
+  0% {
+    opacity: 0;
+    transform: translate3d(-200px, 100px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dissolveInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(200px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dissolveIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dissolveILeft {
+  100% {
+    opacity: 0;
+    transform: translate3d(100px, 0, 0);
+  }
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, -100px);
+  }
+}
+
+.moveILeft {
+  animation: dissolveInLeft 0.7s ease-in-out; /* Durée de l'animation */
+}
+
+@media (width: 768px) {
+  .gallery {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .gallery .gallery_g {
+    flex: 1;
+    width: 100%;
+  }
+}
+
+/*Animations section*/
+
+[class*='reveal-'] {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: rotateY(0);
+  transition: 1s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-2 {
+  transition-delay: 0.1s;
+}
+
+.reveal-3 {
+  transition-delay: 0.2s;
+}
+
+.reveal-4 {
+  transition-delay: 0.3s;
+}
