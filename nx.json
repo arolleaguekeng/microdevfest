@@ -16,15 +16,6 @@
   },
   "nxCloudId": "67563ada52596d3377942e2b",
   "plugins": [
-    {
-      "plugin": "@nx/next/plugin",
-      "options": {
-        "startTargetName": "start",
-        "buildTargetName": "build",
-        "devTargetName": "dev",
-        "serveStaticTargetName": "serve-static"
-      }
-    }
   ],
   "targetDefaults": {
     "@angular-devkit/build-angular:browser": {
