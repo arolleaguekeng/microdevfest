@@ -65,6 +65,98 @@ nx g @nx/react:tailwindcss apps/shop
     },
 ```
 
+# Configure React remote project
 
+## Convert React Components to Web Components
+
+```ts
+import ReactDOM from 'react-dom';
+export function App() {
+  return (
+    <div className="bg-gray-100 p-4">
+      <h1 className="text-2xl font-bold">Shop</h1>
+      <p className="text-gray-600">This is the React Home page</p>
+    </div>
+  );
+}
+
+export function defineReactWebComponent() {
+  class ReactWebComponent extends HTMLElement {
+    connectedCallback() {
+      ReactDOM.render(<App />, this);
+    }
+
+    disconnectedCallback() {
+      ReactDOM.unmountComponentAtNode(this);
+    }
+  }
+
+  if (!customElements.get('home-react')) {
+    customElements.define('home-react', ReactWebComponent);
+  }
+}
+
+defineReactWebComponent();
+export default App;
+```
+
+# Configure Angular host Project
+
+## Create Angular Web Component Wrapper
+
+On the shell project, `./shell/src/app/components` create new component to wrap the remote component
+
+```sh
+nx g @nx/angular:component react-wrapper
+```
+
+```ts
+import { AfterContentInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  template: '<div #vc></div>',
+})
+export class WrapperComponent implements AfterContentInit {
+  @ViewChild('vc', { read: ElementRef, static: true }) vc!: ElementRef;
+
+  constructor(private route: ActivatedRoute) {}
+
+  async ngAfterContentInit(): Promise<void> {
+    const elementName = this.route.snapshot.data['elementName'];
+    const loader = this.route.snapshot.data['loadChildren'];
+
+    await loader();
+    const element = document.createElement(elementName);
+    this.vc.nativeElement.appendChild(element);
+  }
+}
+```
+
+## Add the route to the shell project
+
+On the shell project, `./shell/src/app/app.routes.ts` add the route to the remote components
+
+```ts
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Route } from '@angular/router';
+import { loadRemote } from '@module-federation/enhanced/runtime';
+import { WrapperComponent } from './components/react-wrapper/react-wrapper-component';
+
+export const appRoutes: Route[] = [
+  {
+    path: 'shop',
+    loadChildren: () => loadRemote<typeof import('shop/Routes')>('shop/Routes').then((m) => m!.remoteRoutes),
+  },
+  {
+    path: 'home',
+    component: WrapperComponent,
+    data: {
+      elementName: 'home-react',
+      loadChildren: () => import('home/Module'),
+    },
+  },
+];
+```
 
 ## Useful links

@@ -8,7 +8,7 @@ export function App() {
           <div className="relative flex flex-col items-center w-full md:max-w-[80vw] xl:max-w-[65vw] mx-auto overflow-visible lg:-mt-14 xl:-mt-0">
             <div className="">
               <img
-                src={"assets/images/logo-devfest/logo-devfest-2024-home.png"}
+                src={'assets/images/logo-devfest/logo-devfest-2024-home.png'}
                 alt="DevFest logo Douala "
                 className="xl:h-[140px] md:h-[100px] lg:h-[100px] h-[50px]"
               />
@@ -17,7 +17,7 @@ export function App() {
             <div className="text-white relative xl:bottom-16 flex flex-col items-center w-full justify-center xl:mt-6">
               <div className="relative w-full flex items-center justify-center">
                 <div className="text-[28px] md:text-[25px] lg:text-[35px] xl:text-[50px] text-center font-bold font-TiltWarp">
-                Back on December 7th and 14th, 2024
+                  Back on December 7th and 14th, 2024
                 </div>
               </div>
               <div className="w-full max-w-[1200px] mt-5">
@@ -132,7 +132,6 @@ export function App() {
   );
 }
 
-// Fonction pour définir le Web Component
 export function defineReactWebComponent() {
   class ReactWebComponent extends HTMLElement {
     connectedCallback() {
@@ -144,12 +143,10 @@ export function defineReactWebComponent() {
     }
   }
 
-  // Enregistrer le Web Component
-  if (!customElements.get('home-react')) { 
+  if (!customElements.get('home-react')) {
     customElements.define('home-react', ReactWebComponent);
   }
 }
 
-// Appel pour enregistrer le composant
 defineReactWebComponent();
 export default App;

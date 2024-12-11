@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Route } from '@angular/router';
 import { loadRemote } from '@module-federation/enhanced/runtime';
-import { WrapperComponent } from './react-wrapper/react-wrapper-component';
+import { WrapperComponent } from './components/react-wrapper/react-wrapper-component';
 
 export const appRoutes: Route[] = [
   {
@@ -27,5 +27,4 @@ export const appRoutes: Route[] = [
       loadChildren: () => import('home/Module'),
     },
   },
-
 ];
