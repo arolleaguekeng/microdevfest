@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/home",
+    "public": "dist",
     "headers": [
       {
         "source": "/mf-manifest.json",
