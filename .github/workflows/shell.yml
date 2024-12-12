@@ -27,17 +27,20 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      # Install Dependencies
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+      # Clean and Reinstall Dependencies
+      - name: Clean Install Dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm cache clean --force
+          npm install --legacy-peer-deps
 
       # Set Nx SHAs for affected commands
       - name: Set SHAs for Nx Affected
         uses: nrwl/nx-set-shas@v4
 
-      # Run Lint, Test, and Build
-      - name: Build shell Project
-        run: npx nx build shell --configuration=production
+      # Build Affected Projects
+      - name: Build Affected Projects
+        run: npx nx affected -t build --configuration=production
 
       # Deploy to Firebase Hosting
       - name: Deploy Angular shell App
@@ -45,9 +48,4 @@ jobs:
         with:
           firebase_token: ${{ secrets.FIREBASE_TOKEN }}
           project_id: shell
-        env:
-          FIREBASE_CLI_PREVIEWS: hostingchannels
-
-      - name: Verify and Finalize Deployment
-        run: |
-          echo "Deployment to Firebase completed successfully."
+          channel_id: live
