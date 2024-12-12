@@ -30,8 +30,6 @@ jobs:
       # Clean Install Dependencies
       - name: Install Dependencies
         run: |
-          rm -rf node_modules package-lock.json
-          npm cache clean --force
           npm install --legacy-peer-deps
 
       # Set Nx SHAs for affected commands
@@ -46,22 +44,22 @@ jobs:
       - name: Deploy Shell
         uses: w9jds/firebase-action@v2.0.0
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_TOKEN }}
         with:
-          args: -P shell deploy --only hosting --config apps/shell/firebase.json
+          args: -P microdevfest-shell deploy --only hosting --config apps/shell/firebase.json
 
       # Deploy Home
       - name: Deploy Home
         uses: w9jds/firebase-action@v2.0.0
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_TOKEN }}
         with:
-          args: -P home deploy --only hosting --config apps/home/firebase.json
+          args: -P microdevfest-home deploy --only hosting --config apps/home/firebase.json
 
       # Deploy Shop
       - name: Deploy Shop
         uses: w9jds/firebase-action@v2.0.0
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_TOKEN }}
         with:
-          args: -P shop deploy --only hosting --config apps/shop/firebase.json
+          args: -P microdevfest-shop deploy --only hosting --config apps/shop/firebase.json
