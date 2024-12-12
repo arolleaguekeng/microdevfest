@@ -1,4 +1,4 @@
-name: Shop CI   
+name: shop CI
 
 on:
   push:
@@ -34,21 +34,13 @@ jobs:
       - name: Set SHAs for Nx Affected
         uses: nrwl/nx-set-shas@v4
 
-      # Run Lint, Test, and Build only for affected projects
+      # Run Lint, Test, and Build
       - name: Run Lint, Test, and Build
-        id: run_lint_test_build
         run: |
-          if npx nx print-affected --target=build --select=projects | grep -q 'shop'; then
-            echo "::set-output name=shop_affected::true"
-            npx nx affected -t build
-          else
-            echo "::set-output name=shop_affected::false"
-            echo "shop project is not affected, skipping build."
-          fi
+          npx nx affected -t build
 
-      # Conditional Deployment Steps
+      # Deploy Apps
       - name: Deploy Apps
-        if: ${{ steps.run_lint_test_build.outputs.shop_affected == 'true' }}
         run: |
           # Setup Firebase CLI
           uses: w9jds/firebase-action@v2.0.0
