@@ -40,7 +40,7 @@ jobs:
 
       # Build All Affected Apps
       - name: Build All Affected Apps
-        run: npx nx affected -t build --configuration=production
+        run: npx nx  build shell --configuration=production
 
       # Deploy Shell
       - name: Deploy Shell
