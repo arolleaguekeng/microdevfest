@@ -1,4 +1,4 @@
-name: shell CI
+name: home CI
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      # Clean and Reinstall Dependencies
+      # Clean Install Dependencies
       - name: Clean Install Dependencies
         run: |
           rm -rf node_modules package-lock.json
@@ -43,9 +43,9 @@ jobs:
         run: npx nx affected -t build --configuration=production
 
       # Deploy to Firebase Hosting
-      - name: Deploy Angular shell App
+      - name: Deploy Angular Home App
         uses: w9jds/firebase-action@v2.0.0
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         with:
-          firebase_token: ${{ secrets.FIREBASE_TOKEN }}
-          project_id: shell
-          channel_id: live
+          args: deploy --only hosting:home --project=home
