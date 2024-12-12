@@ -46,7 +46,7 @@ jobs:
       - name: Deploy Shell
         uses: w9jds/firebase-action@v2.0.0
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         with:
           args: -P microdevfest-shell deploy --only hosting --config apps/shell/firebase.json
 
@@ -54,7 +54,7 @@ jobs:
       - name: Deploy Home
         uses: w9jds/firebase-action@v2.0.0
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         with:
           args: -P microdevfest-home deploy --only hosting --config apps/home/firebase.json
 
@@ -62,6 +62,6 @@ jobs:
       - name: Deploy Shop
         uses: w9jds/firebase-action@v2.0.0
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         with:
           args: -P microdevfest-shop deploy --only hosting --config apps/shop/firebase.json
