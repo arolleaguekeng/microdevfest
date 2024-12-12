@@ -16,11 +16,11 @@ export function App() {
 
             <div className="text-white relative xl:bottom-16 flex flex-col items-center w-full justify-center xl:mt-6">
               <div className="relative w-full flex items-center justify-center">
-                <div className="text-[28px] md:text-[25px] lg:text-[35px] xl:text-[50px] text-center font-bold font-TiltWarp">
+                <div className="text-[28px] md:text-[25px] lg:text-[35px] xl:text-[50px] text-center font-bold font-TiltWarp border-r-red-400">
                   Back on December 7th and 14th, 2024
                 </div>
               </div>
-              <div className="w-full max-w-[1200px] mt-5">
+              <div className="w-full max-w-[1200px] mt-5 bg-green-200">
                 <div className="flex flex-col md:flex-row justify-center items-center gap-5">
                   <a
                     href="https://docs.google.com/presentation/d/1QTZFZpuGHnft8bQyZjtigga7Fn_7NA7Aih35qhZ0Qq4/edit?usp=sharing"
