@@ -1,4 +1,4 @@
-name: CI
+name: Shell CI
 
 on:
   push:
@@ -36,10 +36,13 @@ jobs:
 
       # Run Lint, Test, and Build only for affected projects
       - name: Run Lint, Test, and Build
+        id: run_lint_test_build
         run: |
           if npx nx print-affected --target=build --select=projects | grep -q 'shell'; then
+            echo "::set-output name=shell_affected::true"
             npx nx affected -t build
           else
+            echo "::set-output name=shell_affected::false"
             echo "Shell project is not affected, skipping build."
           fi
 

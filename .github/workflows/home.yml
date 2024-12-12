@@ -1,4 +1,4 @@
-name: CI
+name: Home CI
 
 on:
   push:
@@ -36,10 +36,13 @@ jobs:
 
       # Run Lint, Test, and Build only for affected projects
       - name: Run Lint, Test, and Build
+        id: run_lint_test_build
         run: |
           if npx nx print-affected --target=build --select=projects | grep -q 'home'; then
+            echo "::set-output name=home_affected::true"
             npx nx affected -t build
           else
+            echo "::set-output name=home_affected::false"
             echo "home project is not affected, skipping build."
           fi
 
