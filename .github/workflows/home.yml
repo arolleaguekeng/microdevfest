@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Setup Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # Install Dependencies
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      # Set Nx SHAs for affected commands
+      - name: Set SHAs for Nx Affected
+        uses: nrwl/nx-set-shas@v4
+
+      # Run Lint, Test, and Build only for affected projects
+      - name: Run Lint, Test, and Build
+        run: |
+          if npx nx print-affected --target=build --select=projects | grep -q 'home'; then
+            npx nx affected -t build
+          else
+            echo "home project is not affected, skipping build."
+          fi
+
+      # Conditional Deployment Steps
+      - name: Deploy Apps
+        if: ${{ steps.run_lint_test_build.outputs.home_affected == 'true' }}
+        run: |
+          # Setup Firebase CLI
+          uses: w9jds/firebase-action@v2.0.0
+          with:
+          firebase_token: ${{ secrets.FIREBASE_TOKEN }}
+
+          # Deploy Angular home App
+          npx nx build home --configuration=production
+          firebase deploy --only hosting:home --project=home

@@ -160,3 +160,11 @@ export const appRoutes: Route[] = [
 ```
 
 ## Useful links
+
+
+## build the project for production
+
+```sh
+ npx nx build shell --configuration=production
+```
+
