@@ -1,4 +1,4 @@
-name: home CI
+name: multi-app CI
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
           cache: 'npm'
 
       # Clean Install Dependencies
-      - name: Clean Install Dependencies
+      - name: Install Dependencies
         run: |
           rm -rf node_modules package-lock.json
           npm cache clean --force
@@ -38,14 +38,30 @@ jobs:
       - name: Set SHAs for Nx Affected
         uses: nrwl/nx-set-shas@v4
 
-      # Build Affected Projects
-      - name: Build Affected Projects
+      # Build All Affected Apps
+      - name: Build All Affected Apps
         run: npx nx affected -t build --configuration=production
 
-      # Deploy to Firebase Hosting
-      - name: Deploy Angular Home App
+      # Deploy Shell
+      - name: Deploy Shell
         uses: w9jds/firebase-action@v2.0.0
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         with:
-          args: deploy --only hosting:home --project=home
+          args: -P shell deploy --only hosting --config apps/shell/firebase.json
+
+      # Deploy Home
+      - name: Deploy Home
+        uses: w9jds/firebase-action@v2.0.0
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        with:
+          args: -P home deploy --only hosting --config apps/home/firebase.json
+
+      # Deploy Shop
+      - name: Deploy Shop
+        uses: w9jds/firebase-action@v2.0.0
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        with:
+          args: -P shop deploy --only hosting --config apps/shop/firebase.json
