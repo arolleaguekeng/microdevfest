@@ -1,0 +1,5 @@
+
+{
+  "home": "http://localhost:4202/mf-manifest.json",
+  "shop": "http://localhost:4201/mf-manifest.json"
+}

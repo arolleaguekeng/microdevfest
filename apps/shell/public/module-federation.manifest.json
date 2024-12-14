@@ -1,4 +1,4 @@
 {
-  "home": "http://localhost:4202/mf-manifest.json",
-  "shop": "http://localhost:4201/mf-manifest.json"
+  "home": "https://microdevfest-home.web.app/mf-manifest.json",
+  "shop": "https://microdevfest-shop.web.app/mf-manifest.json"
 }
