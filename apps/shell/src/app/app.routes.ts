@@ -5,13 +5,6 @@ import { WrapperComponent } from './components/react-wrapper/react-wrapper-compo
 
 export const appRoutes: Route[] = [
   {
-    path: 'shop',
-    loadChildren: () =>
-      loadRemote<typeof import('shop/Routes')>('shop/Routes').then(
-        (m) => m!.remoteRoutes
-      ),
-  },
-  {
     path: 'home',
     component: WrapperComponent,
     data: {
@@ -26,5 +19,12 @@ export const appRoutes: Route[] = [
       elementName: 'home-react',
       loadChildren: () => import('home/Module'),
     },
+  },
+  {
+    path: 'shop',
+    loadChildren: () =>
+      loadRemote<typeof import('shop/Routes')>('shop/Routes').then(
+        (m) => m!.remoteRoutes
+      ),
   },
 ];

@@ -1,0 +1,43 @@
+<div
+  class="bg-background-dark p-4 md:p-14 flex flex-col justify-center items-center"
+>
+  <h1 class="text-4xl font-bold text-white mb-4 font-TiltWarp">
+    Devfest Packs
+  </h1>
+  <p class="text-lg text-gray-300 mb-8">
+    Get your Devfest packs and enjoy the best of the Devfest experience.
+  </p>
+
+  <div
+    class="container mx-auto md:px-4 md:py-8 grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center justify-center items-center md:w-full"
+  >
+    @for (pack of hunterPacks; track $index) {
+    <div
+      class="flex flex-col bg-gray-800 text-white p-6 rounded-lg shadow-lg w-full"
+      [ngClass]="{
+        'md:col-span-3': pack.isLandScape,
+        'md:w-10/12': pack.isLandScape
+      }"
+    >
+      <div class="flex items-center mb-4">
+        <div>
+          <h3 class="text-2xl font-bold font-TiltWarp">{{ pack.name }}</h3>
+          <p class="text-orange-400 text-3xl">
+            {{ pack.price | currency : 'XOF' : 'symbol' }}
+          </p>
+        </div>
+      </div>
+
+      <hr class="border-gray-700 my-4" />
+      <img src="{{ pack.cover }}" alt="" placeholder />
+
+      <a
+        href="{{ pack.link }}"
+        class="cursor-pointer transition-all bg-green-500 text-white px-6 py-2 rounded-lg border-green-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px] mt-7 text-center"
+      >
+        Get This Pack
+      </a>
+    </div>
+    }
+  </div>
+</div>

@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 <nav
   class="w-full fixed top-0 shadow-lg text-white bg-black bg-opacity-10 backdrop-filter backdrop-blur-lg font-TiltWarp"
 >
@@ -29,7 +31,7 @@
       <ul class="flex flex-col lg:flex-row list-none ml-auto">
         <li class="nav-item">
           <a
-            routerLink="/"
+            href="/"
             routerLinkActive="text-green-400"
             class="block lg:inline-block py-2 px-4 hover:text-gray-400 font-TiltWarp"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -40,56 +42,13 @@
         </li>
         <li class="nav-item">
           <a
-            routerLink="/team"
-            routerLinkActive="text-green-400"
-            class="block lg:inline-block py-2 px-4 hover:text-gray-400 font-TiltWarp"
-            [routerLinkActiveOptions]="{ exact: true }"
-            (click)="toggleNavbar()"
-          >
-            Team
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            routerLink="/partners"
-            routerLinkActive="text-green-400"
-            class="block lg:inline-block py-2 px-4 hover:text-gray-400 font-TiltWarp"
-            [routerLinkActiveOptions]="{ exact: true }"
-            (click)="toggleNavbar()"
-          >
-            Partners
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            routerLink="/magasin"
+            href="/shop"
             routerLinkActive="text-green-400"
             class="block lg:inline-block py-2 px-4 hover:text-gray-400 font-TiltWarp"
             [routerLinkActiveOptions]="{ exact: true }"
             (click)="toggleNavbar()"
           >
             Shop
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            routerLink="/speakers"
-            routerLinkActive="text-green-400"
-            class="block lg:inline-block py-2 px-4 hover:text-gray-400 font-TiltWarp"
-            [routerLinkActiveOptions]="{ exact: true }"
-            (click)="toggleNavbar()"
-          >
-            Speakers
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            routerLink="/planing"
-            routerLinkActive="text-green-400"
-            class="block lg:inline-block py-2 px-4 hover:text-gray-400 font-TiltWarp"
-            [routerLinkActiveOptions]="{ exact: true }"
-            (click)="toggleNavbar()"
-          >
           </a>
         </li>
       </ul>
